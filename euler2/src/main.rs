@@ -3,19 +3,9 @@ mod fibonacci;
 use fibonacci::Fibonacci;
 
 fn main() {
-
-    let mut sum = 0;
-
-    for f in Fibonacci::new() {
-        if f > 4000000 {
-            break;
-        }
-
-        if f % 2 == 0 {
-            sum += f;
-        }
-    }
+    let sum = Fibonacci::new()
+        .take_while(|&elem| elem < 4000000)
+        .fold(0, |sum, f| if f % 2 == 0 { sum + f } else { sum });
 
     println!("Sum of fibs: {}", sum);
-
 }
